@@ -35,10 +35,11 @@ class CobaltLaser:
 
     def getStatus(self):
         result = []
-        for cmd, stat in [('l?', 'Emission on?')
-                          ('p?', 'Target power:'),
-                          ('pa?', 'Measured power:'),
-                          ('f?', 'Fault?')]:
+        for cmd, stat in [('l?', 'Emission on?'),
+                            ('p?', 'Target power:'),
+                            ('pa?', 'Measured power:'),
+                            ('f?', 'Fault?'),
+                            ('hrs?', 'Head operating hours:')]:
             self.write(cmd)
             result.append(stat + ' ' + self.readline())
         return result
@@ -46,23 +47,23 @@ class CobaltLaser:
     ## Turn the laser ON. Return True if we succeeded, False otherwise.
     def enable(self):
         print "Turning laser ON at %s" % time.strftime('%Y-%m-%d %H:%M:%S')
-        response = ''
-        #Use @cob1 to start: this recovers from any interlock event.
-        self.write('@cob1') 
-        response.append(self.readline())
-        #Set power to something small
-        self.setPower(0.05)
-        response.append(self.readline())
-        print "Enable response: [%s]" % response
+        #Set power to something small ... < 10% is unstable, though.
+        self.setPower_mW(self.getMaxPower_mW() / 10.0)
+        response = self.readline()
+        print "Set power response: [%s]" % response
         #We don't want 'direct control' mode.
         self.write('@cobasdr 0')
         response = self.readline()
         print "@cobasdr 0 response: [%s]" % response
+        #Finally, turn on emission.
+        self.write('l1') 
+        response = self.readline()
+        print "l1: [%s]" % response
 
         if not self.getIsOn():
             # Something went wrong.
             print "Failed to turn on. Current status:\r\n"
-            print(self.getStatus)
+            print self.getStatus()
             return False
         return True
 
@@ -96,7 +97,8 @@ class CobaltLaser:
 
     def setPower_mW(self, mW):
         mW = min(mW, self.getMaxPower_mW)
-        self.write("p %.4f" % mW / 1000)
+        print "Setting laser power to %.4fW at %s"  % (mW / 1000.0, time.strftime('%Y-%m-%d %H:%M:%S'))
+        self.write("p %.4f" % (mW / 1000.0))
         return self.readline()
 
 
