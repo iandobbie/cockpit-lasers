@@ -86,7 +86,7 @@ class CobaltLaser:
         # 'gmlp?' gets the maximum laser power in mW.
         self.write('gmlp?')
         response = self.readline()
-        return int(response)
+        return float(response)
 
 
     def getPower_mW(self):
