@@ -100,19 +100,23 @@ class CobaltLaser:
         return self.readline()
 
 
-from optparse import OptionParser
+if __name__ == "__main__":
+    ## Only run when called as a script --- do not run on include.
+    #  This way, we can use an interactive shell to test out the class.
 
-parser = OptionParser()
-parser.add_option("-p", "--port", type="int", dest="net_port", default=7776, help="TCP port to listen on for service", metavar="PORT_NUMBER")
-parser.add_option("-n", "--name", dest="service_name", default='pyro561CobaltLaser', help="name of service", metavar="NAME")
-parser.add_option("-s", "--serial", type="int", dest="serial_port", default=1, help="serial port number", metavar="PORT_NUMBER")
-parser.add_option("-b", "--baud", type="int", dest="baud_rate", default=9600, help="serial port baud rate in bits/sec", metavar="RATE")
-(options, args) = parser.parse_args()
+    from optparse import OptionParser
 
-laser = CobaltLaser(options.serial_port, options.baud_rate, 2)
+    parser = OptionParser()
+    parser.add_option("-p", "--port", type="int", dest="net_port", default=7776, help="TCP port to listen on for service", metavar="PORT_NUMBER")
+    parser.add_option("-n", "--name", dest="service_name", default='pyro561CobaltLaser', help="name of service", metavar="NAME")
+    parser.add_option("-s", "--serial", type="int", dest="serial_port", default=1, help="serial port number", metavar="PORT_NUMBER")
+    parser.add_option("-b", "--baud", type="int", dest="baud_rate", default=9600, help="serial port baud rate in bits/sec", metavar="RATE")
+    (options, args) = parser.parse_args()
 
-daemon = Pyro4.Daemon(port = options.net_port,
-        host = socket.gethostbyname(socket.gethostname()))
-Pyro4.Daemon.serveSimple(
-        {laser: options.service_name},
-        daemon = daemon, ns = False, verbose = True)
+    laser = CobaltLaser(options.serial_port, options.baud_rate, 2)
+
+    daemon = Pyro4.Daemon(port = options.net_port,
+            host = socket.gethostbyname(socket.gethostname()))
+    Pyro4.Daemon.serveSimple(
+            {laser: options.service_name},
+            daemon = daemon, ns = False, verbose = True)
