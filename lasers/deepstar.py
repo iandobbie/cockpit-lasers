@@ -123,13 +123,13 @@ class DeepstarLaser:
 
 
     def getPower_mW(self):
-        maxPower = self.getMaxPower()
+        maxPower = self.getMaxPower_mW()
         power = self.getPower()
         return maxPower * float(power) / float(0xFFF)
 
 
     def setPower_mW(self, mW):
-        maxPower = self.getMaxPower()
+        maxPower = self.getMaxPower_mW()
         level = float(mW) / maxPower
         self.setPower(level)
 
