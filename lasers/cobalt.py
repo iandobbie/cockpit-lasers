@@ -4,6 +4,7 @@ import socket
 import threading
 import time
 
+CONFIG_NAME = 'cobalt'
 
 class CobaltLaser:
     def __init__(self, serialPort, baudRate, timeout):
@@ -100,6 +101,65 @@ class CobaltLaser:
         print "Setting laser power to %.4fW at %s"  % (mW / 1000.0, time.strftime('%Y-%m-%d %H:%M:%S'))
         self.write("p %.4f" % (mW / 1000.0))
         return self.readline()
+
+
+class Server(object):
+    def __init__(self):
+        self.run_flag = True
+        self.threads = []
+        self.daemons = []
+        self.devices = []
+
+
+    def run(self):
+        import readconfig
+        config = readconfig.config
+        sections = [s for s in config.sections() if s.startswith(CONFIG_NAME)]
+
+        for section in sections:
+            com = config.get(section, 'comPort')
+            baud = config.get(section, 'baud')
+            host = config.get(section, 'ipAddress')
+            port = config.get(section, 'port')
+            try:
+                timeout = config.get(section, 'timeout')
+            except:
+                timeout = 1.
+
+            daemon = Pyro4.Daemon(port=port, host=host)
+            device = DeepstarLaser(com, baud, timeout)
+
+            # Start the daemon in a new thread.
+            daemon_thread = threading.Thread(
+                target=Pyro4.Daemon.serveSimple,
+                args = ({server: 'pyro%s' % section}),
+                kwargs = {'daemon': daemon, 'ns': False}
+                )
+            daemon_thread.start()
+
+            self.daemons.append(daemon)
+            self.threads.append(daemon_thread)
+
+
+        # Wait until run_flag is set to False.
+        while self.run_flag:
+            time.sleep(1)
+
+        # Do any cleanup.
+        for daemon in self.daemons():
+            daemon.Shutdown()
+
+        for devices in self.devices():
+            device.disable()
+            del(device)
+
+        for thread in self.threads():
+            thread.stop()
+            thread.join()
+
+
+    def shutdown(self):
+        self.run_flag = 0
 
 
 if __name__ == "__main__":
