@@ -4,7 +4,7 @@ import socket
 import threading
 import time
 
-CONFIG_NAME = 'cobalt'
+CONFIG_NAME = 'cobolt'
 
 class CobaltLaser:
     def __init__(self, serialPort, baudRate, timeout):
