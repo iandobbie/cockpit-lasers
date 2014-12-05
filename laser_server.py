@@ -66,11 +66,11 @@ class Server(object):
             time.sleep(1)
 
         # Do any cleanup.
-        self.daemon.Shutdown()
+        self.daemon.shutdown()
         self.daemon_thread.join()
 
         # For each laser ...
-        for (device, name) in self.devices():
+        for (device, name) in self.devices.iteritems():
             # ... make sure emission is switched off
             device.disable()
             # ... relase the COM port.
@@ -79,3 +79,17 @@ class Server(object):
 
     def stop(self):
         self.run_flag = False
+
+if __name__ == "__main__":
+    ## Only run when called as a script --- do not run on include.
+    #  This way, we can use an interactive shell to test out the class.
+    server = Server()
+    server_thread = threading.Thread(target = server.run)
+    server_thread.start()
+
+    try:
+        while True:
+            time.sleep(1)
+    except (KeyboardInterrupt, SystemExit):
+        server.stop()
+        server_thread.join()
