@@ -6,7 +6,7 @@ import time
 
 CONFIG_NAME = 'cobolt'
 
-class CobaltLaser:
+class CoboltLaser:
     def __init__(self, serialPort, baudRate, timeout):
         print "Connecting to laser on port",serialPort,"with rate",baudRate,"and timeout",timeout
         self.connection = serial.Serial(port = serialPort,
@@ -15,7 +15,7 @@ class CobaltLaser:
             bytesize = serial.EIGHTBITS, parity = serial.PARITY_NONE)
         self.write('sn?')
         response = self.readline()
-        print "Cobalt laser serial number: [%s]" % response
+        print "Cobolt laser serial number: [%s]" % response
 
 
     ## Simple passthrough.
@@ -170,12 +170,12 @@ if __name__ == "__main__":
 
     parser = OptionParser()
     parser.add_option("-p", "--port", type="int", dest="net_port", default=7776, help="TCP port to listen on for service", metavar="PORT_NUMBER")
-    parser.add_option("-n", "--name", dest="service_name", default='pyro561CobaltLaser', help="name of service", metavar="NAME")
+    parser.add_option("-n", "--name", dest="service_name", default='pyro561CoboltLaser', help="name of service", metavar="NAME")
     parser.add_option("-s", "--serial", type="int", dest="serial_port", default=1, help="serial port number", metavar="PORT_NUMBER")
     parser.add_option("-b", "--baud", type="int", dest="baud_rate", default=9600, help="serial port baud rate in bits/sec", metavar="RATE")
     (options, args) = parser.parse_args()
 
-    laser = CobaltLaser(options.serial_port, options.baud_rate, 2)
+    laser = CoboltLaser(options.serial_port, options.baud_rate, 2)
 
     daemon = Pyro4.Daemon(port = options.net_port,
             host = socket.gethostbyname(socket.gethostname()))
