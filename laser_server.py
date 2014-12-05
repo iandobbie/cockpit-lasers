@@ -77,5 +77,5 @@ class Server(object):
             device.connection.close()
 
 
-    def shutdown(self):
-        self.run_flag = 0
+    def stop(self):
+        self.run_flag = False
