@@ -16,6 +16,10 @@ class CoboltLaser:
         self.write('sn?')
         response = self.readline()
         print "Cobolt laser serial number: [%s]" % response
+	# We need to ensure that autostart is disabled so that we can switch emission
+	# on/off remotely.
+	self.write('@cobas 0')
+	print "Response to @cobas 0 [%s]" % self.readline()
 
 
     ## Simple passthrough.
