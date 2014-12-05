@@ -22,19 +22,22 @@ class Server(object):
             raise Exception('No supported laser modules defined in config.')
 
         loaded_modules = {}
+        print "Loading laser modules:"
         for module in supported_lasers:
             try:
                 m = __import__(module)
+                print "\t%s loaded" % module
             except:
                 raise Exception("Could not load module %s." % module)
             loaded_modules.update({module: m})
 
+        # Map lasers defined in config to their driver module.
         lasers = {section: module_name
                     for section in config.sections() 
                     for module_name in supported_lasers
                     if section.startswith(module_name)}
 
-        # Create laser instances and map to Pyro names
+        # Create laser instances and map to Pyro names.
         for section, module_name in lasers.iteritems():
             com = config.get(section, 'comPort')
             baud = config.get(section, 'baud')
