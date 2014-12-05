@@ -5,7 +5,7 @@ import threading
 import time
 
 CONFIG_NAME = 'cobolt'
-CLASS_NAME = 'CobaltLaser'
+CLASS_NAME = 'CoboltLaser'
 
 class CoboltLaser:
     def __init__(self, serialPort, baudRate, timeout):
