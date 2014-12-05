@@ -9,9 +9,8 @@ CONFIG_NAME = 'laserServer'
 class Server(object):
     def __init__(self):
         self.run_flag = True
-        self.threads = []
-        self.daemons = []
         self.devices = {}
+        self.daemon_thread = None
 
 
     def run(self):
@@ -53,34 +52,29 @@ class Server(object):
         port = config.get(CONFIG_NAME, 'port')
         host = config.get(CONFIG_NAME, 'ipAddress')
 
-        daemon = Pyro4.Daemon(port=int(port), host=host)
+        self.daemon = Pyro4.Daemon(port=int(port), host=host)
         # Start the daemon in a new thread.
-        daemon_thread = threading.Thread(
+        self.daemon_thread = threading.Thread(
             target=Pyro4.Daemon.serveSimple,
             args = (self.devices, ), # our mapping of class instances to names
-            kwargs = {'daemon': daemon, 'ns': False}
+            kwargs = {'daemon': self.daemon, 'ns': False}
             )
-        daemon_thread.start()
-
-        self.daemons.append(daemon)
-        self.threads.append(daemon_thread)
-
+        self.daemon_thread.start()
 
         # Wait until run_flag is set to False.
         while self.run_flag:
             time.sleep(1)
 
         # Do any cleanup.
-        for daemon in self.daemons():
-            daemon.Shutdown()
+        self.daemon.Shutdown()
+        self.daemon_thread.join()
 
+        # For each laser ...
         for (device, name) in self.devices():
+            # ... make sure emission is switched off
             device.disable()
-            del(device)
-
-        for thread in self.threads():
-            thread.stop()
-            thread.join()
+            # ... relase the COM port.
+            device.connection.close()
 
 
     def shutdown(self):
