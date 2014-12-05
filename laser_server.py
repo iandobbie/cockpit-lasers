@@ -5,6 +5,8 @@ import time
 import Pyro4
 
 CONFIG_NAME = 'laserServer'
+Pyro4.config.SERIALIZER = 'pickle'
+Pyro4.config.SERIALIZERS_ACCEPTED.add('pickle')
 
 class Server(object):
     def __init__(self):
