@@ -44,12 +44,11 @@ class Server(object):
             except:
                 timeout = 1.
             # Create an instance of the laser m.CLASS_NAME in module m.
-            m = loaded_modules[module]
+            m = loaded_modules[module_name]
             laser_instance = getattr(m, m.CLASS_NAME)(com, int(baud), int(timeout))
             
             # Add this to the dict mapping lasers to Pyro names.
             self.devices.update({laser_instance: section})
-
 
         port = config.get(CONFIG_NAME, 'port')
         host = config.get(CONFIG_NAME, 'ipAddress')
