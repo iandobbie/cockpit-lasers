@@ -68,6 +68,24 @@ class CoboltLaser:
             result.append(stat + ' ' + self.readline())
         return result
 
+
+    ## Things that should be done when cockpit exits.
+    def onCockpitExit(self):
+        # Disable laser.
+        self.send('l0')
+        self.send('@cob0')
+        self.flushBuffer()
+
+
+    ##  Initialization to do when cockpit connects.
+    def onCockpitInitialize(self):
+        self.flushBuffer()
+        #We don't want 'direct control' mode.
+        self.send('@cobasdr 0')
+        # Force laser into autostart mode.
+        self.send('@cob1')
+
+
     ## Turn the laser ON. Return True if we succeeded, False otherwise.
     def enable(self):
         print "Turning laser ON at %s" % time.strftime('%Y-%m-%d %H:%M:%S')
