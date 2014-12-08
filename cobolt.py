@@ -39,6 +39,24 @@ class CoboltLaser:
         return response
 
 
+    ## Send command and retrieve response.
+    def send(self, command):
+        self.write(str(command))
+        return self.readline()
+
+
+    def clearFault(self):
+        self.write('cf')
+        self.readline()
+        return self.getStatus()
+
+
+    def flushBuffer(self):
+        line = ' '
+        while len(line) > 0:
+            line = self.readline()
+
+
     def getStatus(self):
         result = []
         for cmd, stat in [('l?', 'Emission on?'),
@@ -53,17 +71,8 @@ class CoboltLaser:
     ## Turn the laser ON. Return True if we succeeded, False otherwise.
     def enable(self):
         print "Turning laser ON at %s" % time.strftime('%Y-%m-%d %H:%M:%S')
-        #Set power to something small ... < 10% is unstable, though.
-        self.setPower_mW(self.getMaxPower_mW() / 10.0)
-        response = self.readline()
-        print "Set power response: [%s]" % response
-        #We don't want 'direct control' mode.
-        self.write('@cobasdr 0')
-        response = self.readline()
-        print "@cobasdr 0 response: [%s]" % response
-        #Finally, turn on emission.
-        self.write('l1') 
-        response = self.readline()
+        # Turn on emission.
+        response = self.send('l1')
         print "l1: [%s]" % response
 
         if not self.getIsOn():
@@ -104,8 +113,8 @@ class CoboltLaser:
     def setPower_mW(self, mW):
         mW = min(mW, self.getMaxPower_mW)
         print "Setting laser power to %.4fW at %s"  % (mW / 1000.0, time.strftime('%Y-%m-%d %H:%M:%S'))
-        self.write("p %.4f" % (mW / 1000.0))
-        return self.readline()
+        return self.send("@cobasp %.4f" % (mW / 1000.0))
+
 
 
 if __name__ == "__main__":
