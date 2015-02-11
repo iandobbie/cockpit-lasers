@@ -184,7 +184,7 @@ class DeepstarLaser:
         self.setPower(level)
 
 
-if __name__ == "__main__":
+def main(*args, **kwargs):
     ## Only run when called as a script --- do not run on include.
     #  This way, we can use an interactive shell to test out the class.
 
@@ -204,3 +204,8 @@ if __name__ == "__main__":
     Pyro4.Daemon.serveSimple(
             {laser: options.service_name},
             daemon = daemon, ns = False, verbose = True)
+
+
+if __name__ == "__main__":
+    main()
+
