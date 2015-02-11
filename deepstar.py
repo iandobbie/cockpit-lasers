@@ -3,9 +3,24 @@ import serial
 import socket
 import threading
 import time
+import functools
 
 CONFIG_NAME = 'deepstar'
 CLASS_NAME = 'DeepstarLaser'
+
+def flushBuffer(func):
+    """A decorator to flush the input buffer prior to issuing a command.
+
+    There have been problems with the DeepStar lasers returning junk characters
+    after the expected response, so it is advisable to flush the input buffer
+    prior to running a command and subsequent readline.
+    """
+    @functools.wraps(func)
+    def wrapper(self, *args, **kwargs):
+        self.connection.flushInpu()
+        return func(self, *args, **kwargs)
+
+    return wrapper
 
 
 class DeepstarLaser:
@@ -45,6 +60,7 @@ class DeepstarLaser:
 
     ## Get the status of the laser, by sending the
     # STAT0, STAT1, STAT2, and STAT3 commands.
+    @flushBuffer
     def getStatus(self):
         result = []
         for i in xrange(4):
@@ -54,6 +70,7 @@ class DeepstarLaser:
 
 
     ## Turn the laser ON. Return True if we succeeded, False otherwise.
+    @flushBuffer
     def enable(self):
         print "Turning laser ON at %s" % time.strftime('%Y-%m-%d %H:%M:%S')
         self.write('LON')
@@ -83,6 +100,7 @@ class DeepstarLaser:
 
 
     ## Turn the laser OFF.
+    @flushBuffer
     def disable(self):
         print "Turning laser OFF at %s" % time.strftime('%Y-%m-%d %H:%M:%S')
         self.write('LF')
@@ -91,6 +109,7 @@ class DeepstarLaser:
 
     ## Return True if the laser is currently able to produce light. We assume this is equivalent
     # to the laser being in S2 mode.
+    @flushBuffer
     def getIsOn(self):
         self.write('S?')
         response = self.readline()
@@ -98,6 +117,7 @@ class DeepstarLaser:
         return response == 'S2'
 
 
+    @flushBuffer
     def setPower(self, level):
         if (level > 1.0) :
             return
@@ -112,6 +132,7 @@ class DeepstarLaser:
         return response
 
 
+    @flushBuffer
     def getMaxPower_mW(self):
         # Max power in mW is third token of STAT0.
         self.write('STAT0')
@@ -119,18 +140,21 @@ class DeepstarLaser:
         return int(response.split()[2])
 
 
+    @flushBuffer
     def getPower(self):
         self.write('PP?')
         response = self.readline()
         return int('0x' + response.strip('PP'), 16)
 
 
+    @flushBuffer
     def getPower_mW(self):
         maxPower = self.getMaxPower_mW()
         power = self.getPower()
         return maxPower * float(power) / float(0xFFF)
 
 
+    @flushBuffer
     def setPower_mW(self, mW):
         maxPower = self.getMaxPower_mW()
         level = float(mW) / maxPower
