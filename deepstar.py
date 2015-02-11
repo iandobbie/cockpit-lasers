@@ -23,6 +23,25 @@ def flushBuffer(func):
     return wrapper
 
 
+class LaserLogger(object):
+    def __init__(self):
+        self.fh = None
+
+    def log(self, message):
+        if self.fh:
+            self.fh.write(time.strftime('%Y-%m-%d %H:%M:%S:  '))
+            self.fh.write(message + '\n')
+            self.fh.flush()
+
+    def open(self, filename):
+        path = os.path.dirname(os.path.abspath(__file__))
+        self.fh = open(os.path.join(path, str(filename) + '.txt'), 'w')
+
+    def close(self):
+        self.fh.close()
+        self.fh = None
+
+
 class DeepstarLaser:
     def __init__(self, serialPort, baudRate, timeout):
         print "Connecting to laser on port",serialPort,"with rate",baudRate,"and timeout",timeout
@@ -30,12 +49,15 @@ class DeepstarLaser:
             baudrate = baudRate, timeout = timeout,
             stopbits = serial.STOPBITS_ONE,
             bytesize = serial.EIGHTBITS, parity = serial.PARITY_NONE)
+        # Start a logger.
+        self.logger = LaserLogger()
+        self.logger.open('DeepStar_' + serialPort)
         # If the laser is currently on, then we need to use 7-byte mode; otherwise we need to
         # use 16-byte mode.
         self.write('S?')
         response = self.readline()
-        print "Current laser state: [%s]" % response
-
+        self.logger.log("Current laser state: [%s]" % response)
+        
 
     ## Simple passthrough.
     def read(self, numChars):
@@ -72,29 +94,30 @@ class DeepstarLaser:
     ## Turn the laser ON. Return True if we succeeded, False otherwise.
     @flushBuffer
     def enable(self):
-        print "Turning laser ON at %s" % time.strftime('%Y-%m-%d %H:%M:%S')
+        self.logger.log("Turning laser ON.")
         self.write('LON')
         response = self.readline()
         #Set power to something small
         self.setPower(0.01)
         #Turn on deepstar mode with internal voltage ref
-        print "Enable response: [%s]" % response
+        self.logger.log("Enable response: [%s]" % response)
         self.write('L2')
         response = self.readline()
-        print "L2 response: [%s]" % response
+        self.logger.log("L2 response: [%s]" % response)
         #Enable internal peak power
         self.write('IPO')
         response = self.readline()
-        print "Enable-internal peak power response [%s]" % response
+        self.logger.log("Enable-internal peak power response [%s]" % response)
         #Set MF turns off internal digital and bias modulation
         self.write('MF')
         response = self.readline()
-        print "MF response [%s]" % response
+        self.logger.log("MF response [%s]" % response)
 
         if not self.getIsOn():
             # Something went wrong.
             self.write('S?')
-            print "Failed to turn on. Current status:", self.readline()
+            response = self.readline()
+            self.logger.log("Failed to turn on. Current status: %s" % response)
             return False
         return True
 
@@ -102,7 +125,7 @@ class DeepstarLaser:
     ## Turn the laser OFF.
     @flushBuffer
     def disable(self):
-        print "Turning laser OFF at %s" % time.strftime('%Y-%m-%d %H:%M:%S')
+        self.logger.log("Turning laser OFF.")
         self.write('LF')
         return self.readline()
 
@@ -113,7 +136,7 @@ class DeepstarLaser:
     def getIsOn(self):
         self.write('S?')
         response = self.readline()
-        print "Are we on? [%s]" % response
+        self.logger.log("Are we on? [%s]" % response)
         return response == 'S2'
 
 
@@ -121,14 +144,14 @@ class DeepstarLaser:
     def setPower(self, level):
         if (level > 1.0) :
             return
-        print "level=",level
+        self.logger.log("level=%d" % level)
         power=int (level*0xFFF)
-        print "power=",power
+        self.logger.log("power=%d" % power)
         strPower = "PP%03X" % power
-        print "power level = ",strPower
+        self.logger.log("power level=%s" %strPower)
         self.write(strPower)
         response = self.readline()
-        print "Power response [%s]" % response
+        self.logger.log("Power response [%s]" % response)
         return response
 
 
