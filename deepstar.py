@@ -98,8 +98,6 @@ class DeepstarLaser:
         self.logger.log("Turning laser ON.")
         self.write('LON')
         response = self.readline()
-        #Set power to something small
-        self.setPower(0.01)
         #Turn on deepstar mode with internal voltage ref
         self.logger.log("Enable response: [%s]" % response)
         self.write('L2')
@@ -108,7 +106,7 @@ class DeepstarLaser:
         #Enable internal peak power
         self.write('IPO')
         response = self.readline()
-        self.logger.log("Enable-internal peak power response [%s]" % response)
+        self.logger.log("Enable-internal peak power response: [%s]" % response)
         #Set MF turns off internal digital and bias modulation
         self.write('MF')
         response = self.readline()
@@ -129,6 +127,13 @@ class DeepstarLaser:
         self.logger.log("Turning laser OFF.")
         self.write('LF')
         return self.readline()
+
+
+    @flushBuffer
+    def isAlive(self):
+        self.write('S?')
+        response = self.readline()
+        return response.startswith('S')
 
 
     ## Return True if the laser is currently able to produce light. We assume this is equivalent
