@@ -57,6 +57,12 @@ class CoboltLaser:
             line = self.readline()
 
 
+    def isAlive(self):
+        self.write('l?')
+        response = self.readline()
+        return response in '01'
+
+
     def getStatus(self):
         result = []
         for cmd, stat in [('l?', 'Emission on?'),
