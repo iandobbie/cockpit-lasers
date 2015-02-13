@@ -17,10 +17,10 @@ class CoboltLaser:
         self.write('sn?')
         response = self.readline()
         print "Cobolt laser serial number: [%s]" % response
-	# We need to ensure that autostart is disabled so that we can switch emission
-	# on/off remotely.
-	self.write('@cobas 0')
-	print "Response to @cobas 0 [%s]" % self.readline()
+        # We need to ensure that autostart is disabled so that we can switch emission
+        # on/off remotely.
+        self.write('@cobas 0')
+        print "Response to @cobas 0 [%s]" % self.readline()
 
 
     ## Simple passthrough.
@@ -70,7 +70,7 @@ class CoboltLaser:
 
 
     ## Things that should be done when cockpit exits.
-    def onCockpitExit(self):
+    def onExit(self):
         # Disable laser.
         self.send('l0')
         self.send('@cob0')
@@ -132,7 +132,6 @@ class CoboltLaser:
         mW = min(mW, self.getMaxPower_mW)
         print "Setting laser power to %.4fW at %s"  % (mW / 1000.0, time.strftime('%Y-%m-%d %H:%M:%S'))
         return self.send("@cobasp %.4f" % (mW / 1000.0))
-
 
 
 if __name__ == "__main__":
