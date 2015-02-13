@@ -4,6 +4,7 @@ import socket
 import threading
 import time
 import functools
+import os
 
 CONFIG_NAME = 'deepstar'
 CLASS_NAME = 'DeepstarLaser'
@@ -17,7 +18,7 @@ def flushBuffer(func):
     """
     @functools.wraps(func)
     def wrapper(self, *args, **kwargs):
-        self.connection.flushInpu()
+        self.connection.flushInput()
         return func(self, *args, **kwargs)
 
     return wrapper
