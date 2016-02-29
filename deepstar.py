@@ -178,14 +178,12 @@ class DeepstarLaser(laser.Laser):
         return int('0x' + response.strip('PP'), 16)
 
 
-    @flushBuffer
     def getPower_mW(self):
         maxPower = self.getMaxPower_mW()
         power = self.getPower()
         return maxPower * float(power) / float(0xFFF)
 
 
-    @flushBuffer
     def setPower_mW(self, mW):
         maxPower = self.getMaxPower_mW()
         level = float(mW) / maxPower
