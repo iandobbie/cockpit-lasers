@@ -83,21 +83,9 @@ class Laser(object):
         pass
 
 
-    ## Set the laser power in native units.
-    @abc.abstractmethod
-    def setPower(self, level):
-        pass
-
-
     ## Return the max. power in mW.
     @abc.abstractmethod
     def getMaxPower_mW(self):
-        pass
-
-
-    ## Return the current power in native units.
-    @abc.abstractmethod
-    def getPower(self):
         pass
 
 
