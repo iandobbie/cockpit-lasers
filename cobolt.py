@@ -3,12 +3,14 @@ import serial
 import socket
 import threading
 import time
+import laser
 
 CONFIG_NAME = 'cobolt'
 CLASS_NAME = 'CoboltLaser'
 
-class CoboltLaser:
+class CoboltLaser(laser.Laser):
     def __init__(self, serialPort, baudRate, timeout):
+        super(CoboltLaser, self).__init__()
         print "Connecting to laser on port",serialPort,"with rate",baudRate,"and timeout",timeout
         self.connection = serial.Serial(port = serialPort,
             baudrate = baudRate, timeout = timeout,
