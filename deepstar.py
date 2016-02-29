@@ -4,6 +4,7 @@ import socket
 import threading
 import time
 import functools
+import laser
 import os
 
 CONFIG_NAME = 'deepstar'
@@ -43,8 +44,9 @@ class LaserLogger(object):
         self.fh = None
 
 
-class DeepstarLaser:
+class DeepstarLaser(laser.Laser):
     def __init__(self, serialPort, baudRate, timeout):
+        super(DeepstarLaser, self).__init__()
         print "Connecting to laser on port",serialPort,"with rate",baudRate,"and timeout",timeout
         self.connection = serial.Serial(port = serialPort,
             baudrate = baudRate, timeout = timeout,
