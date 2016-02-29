@@ -13,15 +13,27 @@ CONFIG_NAME = 'dummyLaser'
 CLASS_NAME = 'Laser'
 
 
+def _storeSetPoint(func):
+    def _wrappedSetPower(self, mW):
+        self.powerSetPoint_mW = mW
+        # self seems to be passed implicitly due to binding.
+        func(mW)
+    return _wrappedSetPower
+
+
 ## This is a prototype for a class to be used with laser_server.
 class Laser(object):
     __metaclass__ = abc.ABCMeta
 
     @abc.abstractmethod
-    def __init__(self, serialPort, baudRate, timeout):
+    def __init__(self, *args):
         ## Should connect to the physical device here and set self.connection
         # to a type with read, readline and write methods (e.g. serial.Serial).
         self.connection = None
+        self.powerSetPoint_mW = None
+        # Wrap derived-classes setPower_mW to store power set point.
+        # The __get__(self, Laser) binds the wrapped function to an instance.
+        self.setPower_mW = _storeSetPoint(self.setPower_mW).__get__(self, Laser)
 
 
     ## Simple passthrough.
@@ -93,6 +105,11 @@ class Laser(object):
     @abc.abstractmethod
     def getPower_mW(self):
         pass
+
+
+    ## Return the power set point.
+    def getSetPower_mW(self):
+        return self.powerSetPoint_mW
 
 
     ## Set the power from an argument in mW.
