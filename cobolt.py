@@ -47,13 +47,17 @@ class CoboltLaser(laser.Laser):
             baudrate = baudRate, timeout = timeout,
             stopbits = serial.STOPBITS_ONE,
             bytesize = serial.EIGHTBITS, parity = serial.PARITY_NONE)
+        # Start a logger.
+        self.logger = laser.LaserLogger()
+        self.logger.open(CLASS_NAME + '_' + serialPort)
         self.write('sn?')
         response = self.readline()
-        print "Cobolt laser serial number: [%s]" % response
+        self.logger.log("Cobolt laser serial number: [%s]" % response)
         # We need to ensure that autostart is disabled so that we can switch emission
         # on/off remotely.
         self.write('@cobas 0')
-        print "Response to @cobas 0 [%s]" % self.readline()
+        self.logger.log("Response to @cobas 0 [%s]" % self.readline())
+        self.commsLock = threading.RLock()
 
 
     ## Simple passthrough.
@@ -132,15 +136,15 @@ class CoboltLaser(laser.Laser):
     ## Turn the laser ON. Return True if we succeeded, False otherwise.
     @lockComms
     def enable(self):
-        print "Turning laser ON at %s" % time.strftime('%Y-%m-%d %H:%M:%S')
+        self.logger.log("Turning laser ON at %s" % time.strftime('%Y-%m-%d %H:%M:%S'))
         # Turn on emission.
         response = self.send('l1')
-        print "l1: [%s]" % response
+        self.logger.log("l1: [%s]" % response)
 
         if not self.getIsOn():
             # Something went wrong.
-            print "Failed to turn on. Current status:\r\n"
-            print self.getStatus()
+            self.logger.log("Failed to turn on. Current status:\r\n")
+            self.loggerl.log(self.getStatus())
             return False
         return True
 
@@ -148,7 +152,7 @@ class CoboltLaser(laser.Laser):
     ## Turn the laser OFF.
     @lockComms
     def disable(self):
-        print "Turning laser OFF at %s" % time.strftime('%Y-%m-%d %H:%M:%S')
+        self.logger.log("Turning laser OFF at %s" % time.strftime('%Y-%m-%d %H:%M:%S'))
         self.write('l0')
         return self.readline()
 
@@ -158,7 +162,6 @@ class CoboltLaser(laser.Laser):
     def getIsOn(self):
         self.write('l?')
         response = self.readline()
-        print "Are we on? [%s]" % response
         return response == '1'
 
 
@@ -179,7 +182,7 @@ class CoboltLaser(laser.Laser):
     @lockComms
     def setPower_mW(self, mW):
         mW = min(mW, self.getMaxPower_mW)
-        print "Setting laser power to %.4fW at %s"  % (mW / 1000.0, time.strftime('%Y-%m-%d %H:%M:%S'))
+        self.logger.log("Setting laser power to %.4fW at %s"  % (mW / 1000.0, time.strftime('%Y-%m-%d %H:%M:%S')))
         return self.send("@cobasp %.4f" % (mW / 1000.0))
 
 
