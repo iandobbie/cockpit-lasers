@@ -183,6 +183,12 @@ class CoboltLaser(laser.Laser):
         return self.send("@cobasp %.4f" % (mW / 1000.0))
 
 
+    @lockComms
+    def getSetPower_mW(self):
+        self.write('p?')
+        return 1000 * float(self.readline())
+
+
 if __name__ == "__main__":
     ## Only run when called as a script --- do not run on include.
     #  This way, we can use an interactive shell to test out the class.
