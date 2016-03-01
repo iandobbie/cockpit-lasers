@@ -172,6 +172,9 @@ class DeepstarLaser(laser.Laser):
 
     @flushBuffer
     def getPower(self):
+        if not self.getIsOn():
+            # Laser is not on.
+            return 0
         self.write('PP?')
         response = self.readline()
         return int('0x' + response.strip('PP'), 16)
