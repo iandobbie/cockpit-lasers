@@ -30,12 +30,14 @@ def flushBuffer(func):
 
     There have been problems with the DeepStar lasers returning junk characters
     after the expected response, so it is advisable to flush the input buffer
-    prior to running a command and subsequent readline.
+    prior to running a command and subsequent readline. It also locks the comms
+    channel so that a function must finish all its comms before another can run.
     """
     @functools.wraps(func)
     def wrapper(self, *args, **kwargs):
-        self.connection.flushInput()
-        return func(self, *args, **kwargs)
+        with self.commsLock:
+            self.connection.flushInput()
+            return func(self, *args, **kwargs)
 
     return wrapper
 
@@ -56,6 +58,7 @@ class DeepstarLaser(laser.Laser):
         self.write('S?')
         response = self.readline()
         self.logger.log("Current laser state: [%s]" % response)
+        self.commsLock = threading.RLock()
         
 
     ## Simple passthrough.
