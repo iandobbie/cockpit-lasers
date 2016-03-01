@@ -21,7 +21,6 @@ import threading
 import time
 import functools
 import laser
-import os
 
 CONFIG_NAME = 'deepstar'
 CLASS_NAME = 'DeepstarLaser'
@@ -41,25 +40,6 @@ def flushBuffer(func):
     return wrapper
 
 
-class LaserLogger(object):
-    def __init__(self):
-        self.fh = None
-
-    def log(self, message):
-        if self.fh:
-            self.fh.write(time.strftime('%Y-%m-%d %H:%M:%S:  '))
-            self.fh.write(message + '\n')
-            self.fh.flush()
-
-    def open(self, filename):
-        path = os.path.dirname(os.path.abspath(__file__))
-        self.fh = open(os.path.join(path, str(filename) + '.txt'), 'w')
-
-    def close(self):
-        self.fh.close()
-        self.fh = None
-
-
 class DeepstarLaser(laser.Laser):
     def __init__(self, serialPort, baudRate, timeout):
         super(DeepstarLaser, self).__init__()
@@ -69,7 +49,7 @@ class DeepstarLaser(laser.Laser):
             stopbits = serial.STOPBITS_ONE,
             bytesize = serial.EIGHTBITS, parity = serial.PARITY_NONE)
         # Start a logger.
-        self.logger = LaserLogger()
+        self.logger = laser.LaserLogger()
         self.logger.open('DeepStar_' + serialPort)
         # If the laser is currently on, then we need to use 7-byte mode; otherwise we need to
         # use 16-byte mode.

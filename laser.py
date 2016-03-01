@@ -18,6 +18,7 @@ limitations under the License.
 ## This module defines the interface for a laser that can be controlled
 # by cockpit.devices.laserpower.
 import abc
+import os
 import Pyro4
 import serial
 import socket
@@ -36,6 +37,26 @@ def _storeSetPoint(func):
         # self seems to be passed implicitly due to binding.
         func(mW)
     return _wrappedSetPower
+
+
+## A logger for laser objects.
+class LaserLogger(object):
+    def __init__(self):
+        self.fh = None
+
+    def log(self, message):
+        if self.fh:
+            self.fh.write(time.strftime('%Y-%m-%d %H:%M:%S:  '))
+            self.fh.write(message + '\n')
+            self.fh.flush()
+
+    def open(self, filename):
+        path = os.path.dirname(os.path.abspath(__file__))
+        self.fh = open(os.path.join(path, str(filename) + '.txt'), 'w')
+
+    def close(self):
+        self.fh.close()
+        self.fh = None
 
 
 ## This is a prototype for a class to be used with laser_server.
