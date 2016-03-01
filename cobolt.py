@@ -175,6 +175,8 @@ class CoboltLaser(laser.Laser):
 
     @lockComms
     def getPower_mW(self):
+        if not self.getIsOn():
+            return 0
         self.write('pa?')
         return 1000 * float(self.readline())
 
