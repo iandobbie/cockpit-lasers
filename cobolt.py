@@ -20,9 +20,24 @@ import socket
 import threading
 import time
 import laser
+import functools
 
 CONFIG_NAME = 'cobolt'
 CLASS_NAME = 'CoboltLaser'
+
+def lockComms(func):
+    """A decorator to flush the input buffer prior to issuing a command.
+
+    Locks the comms channel so that a function must finish all its comms
+    before another can run.
+    """
+    @functools.wraps(func)
+    def wrapper(self, *args, **kwargs):
+        with self.commsLock:
+            return func(self, *args, **kwargs)
+
+    return wrapper
+
 
 class CoboltLaser(laser.Laser):
     def __init__(self, serialPort, baudRate, timeout):
@@ -63,6 +78,7 @@ class CoboltLaser(laser.Laser):
         return self.readline()
 
 
+    @lockComms
     def clearFault(self):
         self.write('cf')
         self.readline()
@@ -74,13 +90,14 @@ class CoboltLaser(laser.Laser):
         while len(line) > 0:
             line = self.readline()
 
-
+    @lockComms
     def isAlive(self):
         self.write('l?')
         response = self.readline()
         return response in '01'
 
 
+    @lockComms
     def getStatus(self):
         result = []
         for cmd, stat in [('l?', 'Emission on?'),
@@ -94,6 +111,7 @@ class CoboltLaser(laser.Laser):
 
 
     ## Things that should be done when cockpit exits.
+    @lockComms
     def onExit(self):
         # Disable laser.
         self.send('l0')
@@ -102,6 +120,7 @@ class CoboltLaser(laser.Laser):
 
 
     ##  Initialization to do when cockpit connects.
+    @lockComms
     def onCockpitInitialize(self):
         self.flushBuffer()
         #We don't want 'direct control' mode.
@@ -111,6 +130,7 @@ class CoboltLaser(laser.Laser):
 
 
     ## Turn the laser ON. Return True if we succeeded, False otherwise.
+    @lockComms
     def enable(self):
         print "Turning laser ON at %s" % time.strftime('%Y-%m-%d %H:%M:%S')
         # Turn on emission.
@@ -126,6 +146,7 @@ class CoboltLaser(laser.Laser):
 
 
     ## Turn the laser OFF.
+    @lockComms
     def disable(self):
         print "Turning laser OFF at %s" % time.strftime('%Y-%m-%d %H:%M:%S')
         self.write('l0')
@@ -133,6 +154,7 @@ class CoboltLaser(laser.Laser):
 
 
     ## Return True if the laser is currently able to produce light.
+    @lockComms
     def getIsOn(self):
         self.write('l?')
         response = self.readline()
@@ -140,6 +162,7 @@ class CoboltLaser(laser.Laser):
         return response == '1'
 
 
+    @lockComms
     def getMaxPower_mW(self):
         # 'gmlp?' gets the maximum laser power in mW.
         self.write('gmlp?')
@@ -147,11 +170,13 @@ class CoboltLaser(laser.Laser):
         return float(response)
 
 
+    @lockComms
     def getPower_mW(self):
         self.write('pa?')
         return 1000 * float(self.readline())
 
 
+    @lockComms
     def setPower_mW(self, mW):
         mW = min(mW, self.getMaxPower_mW)
         print "Setting laser power to %.4fW at %s"  % (mW / 1000.0, time.strftime('%Y-%m-%d %H:%M:%S'))
