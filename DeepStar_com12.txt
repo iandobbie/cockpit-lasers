@@ -1,0 +1,262 @@
+2016-02-26 10:40:59:  Current laser state: [S1]
+2016-02-26 10:41:07:  Are we on? [S1]
+2016-02-26 10:41:14:  level=0
+2016-02-26 10:41:14:  power=409
+2016-02-26 10:41:14:  power level=PP199
+2016-02-26 10:41:14:  Power response [PP199]
+2016-02-26 10:41:16:  Turning laser ON.
+2016-02-26 10:41:16:  Enable response: [LONOK]
+2016-02-26 10:41:17:  L2 response: [>]
+2016-02-26 10:41:18:  Enable-internal peak power response: [IPO]
+2016-02-26 10:41:18:  MF response [MF]
+2016-02-26 10:41:19:  Are we on? [S2]
+2016-02-26 10:41:31:  level=1
+2016-02-26 10:41:31:  power=4095
+2016-02-26 10:41:31:  power level=PPFFF
+2016-02-26 10:41:32:  Power response [PPFFF]
+2016-02-26 10:41:45:  level=0
+2016-02-26 10:41:45:  power=1023
+2016-02-26 10:41:45:  power level=PP3FF
+2016-02-26 10:41:46:  Power response [PP3FF]
+2016-02-26 10:41:53:  level=0
+2016-02-26 10:41:53:  power=614
+2016-02-26 10:41:53:  power level=PP266
+2016-02-26 10:41:54:  Power response [PP266]
+2016-02-26 11:34:52:  Are we on? [S2]
+2016-02-26 11:34:59:  level=0
+2016-02-26 11:34:59:  power=614
+2016-02-26 11:34:59:  power level=PP266
+2016-02-26 11:34:59:  Power response [PP266]
+2016-02-26 13:16:16:  Are we on? [S2]
+2016-02-26 13:16:16:  Turning laser OFF.
+2016-02-26 13:16:34:  Turning laser ON.
+2016-02-26 13:16:34:  Enable response: [LONOK]
+2016-02-26 13:16:35:  L2 response: [>]
+2016-02-26 13:16:36:  Enable-internal peak power response: [IPO]
+2016-02-26 13:16:36:  MF response [MF]
+2016-02-26 13:16:37:  Are we on? [S2]
+2016-02-26 13:17:26:  level=0
+2016-02-26 13:17:26:  power=409
+2016-02-26 13:17:26:  power level=PP199
+2016-02-26 13:17:27:  Power response [PP199]
+2016-02-26 13:58:32:  Are we on? [S2]
+2016-02-26 13:58:32:  Turning laser OFF.
+2016-02-26 13:58:44:  Turning laser ON.
+2016-02-26 13:58:45:  Enable response: [LONOK]
+2016-02-26 13:58:45:  L2 response: [>]
+2016-02-26 13:58:46:  Enable-internal peak power response: [IPO]
+2016-02-26 13:58:47:  MF response [MF]
+2016-02-26 13:58:48:  Are we on? [S2]
+2016-02-26 14:22:40:  Turning laser OFF.
+2016-02-26 14:24:14:  Are we on? [S1]
+2016-02-26 14:24:23:  level=0
+2016-02-26 14:24:23:  power=409
+2016-02-26 14:24:23:  power level=PP199
+2016-02-26 14:24:23:  Power response [PP199]
+2016-02-26 14:24:34:  Turning laser ON.
+2016-02-26 14:24:35:  Enable response: [LONOK]
+2016-02-26 14:24:35:  L2 response: [>]
+2016-02-26 14:24:36:  Enable-internal peak power response: [IPO]
+2016-02-26 14:24:37:  MF response [MF]
+2016-02-26 14:24:37:  Are we on? [S2]
+2016-02-26 15:17:52:  level=0
+2016-02-26 15:17:52:  power=819
+2016-02-26 15:17:52:  power level=PP333
+2016-02-26 15:17:53:  Power response [PP333]
+2016-02-26 16:17:17:  Turning laser OFF.
+2016-02-26 16:47:02:  Are we on? [S1]
+2016-02-26 16:47:15:  level=0
+2016-02-26 16:47:15:  power=819
+2016-02-26 16:47:15:  power level=PP333
+2016-02-26 16:47:16:  Power response [PP333]
+2016-02-26 16:50:21:  Turning laser OFF.
+2016-02-29 10:10:30:  Are we on? [S1]
+2016-02-29 10:10:48:  level=0
+2016-02-29 10:10:48:  power=819
+2016-02-29 10:10:48:  power level=PP333
+2016-02-29 10:10:49:  Power response [PP333]
+2016-02-29 10:19:14:  Turning laser ON.
+2016-02-29 10:19:15:  Enable response: [UK]
+2016-02-29 10:19:15:  L2 response: [>]
+2016-02-29 10:19:16:  Enable-internal peak power response: [IPO]
+2016-02-29 10:19:17:  MF response [MF]
+2016-02-29 10:19:18:  Are we on? [S2]
+2016-02-29 10:19:47:  Are we on? [S2]
+2016-02-29 10:19:47:  Turning laser OFF.
+2016-02-29 10:21:19:  Turning laser ON.
+2016-02-29 10:21:19:  Enable response: [LONOK]
+2016-02-29 10:21:20:  L2 response: [>]
+2016-02-29 10:21:21:  Enable-internal peak power response: [IPO]
+2016-02-29 10:21:21:  MF response [MF]
+2016-02-29 10:21:22:  Are we on? [S2]
+2016-02-29 10:23:18:  level=0
+2016-02-29 10:23:18:  power=1023
+2016-02-29 10:23:18:  power level=PP3FF
+2016-02-29 10:23:19:  Power response [PP3FF]
+2016-02-29 11:09:50:  level=0
+2016-02-29 11:09:50:  power=819
+2016-02-29 11:09:50:  power level=PP333
+2016-02-29 11:09:50:  Power response [PP333]
+2016-02-29 11:29:07:  level=0
+2016-02-29 11:29:07:  power=1228
+2016-02-29 11:29:07:  power level=PP4CC
+2016-02-29 11:29:08:  Power response [PP4CC]
+2016-02-29 12:44:58:  level=0
+2016-02-29 12:44:58:  power=819
+2016-02-29 12:44:58:  power level=PP333
+2016-02-29 12:44:59:  Power response [PP333]
+2016-02-29 13:21:20:  Are we on? [S2]
+2016-02-29 13:21:21:  Turning laser OFF.
+2016-02-29 13:21:38:  Turning laser ON.
+2016-02-29 13:21:38:  Enable response: [LONOK]
+2016-02-29 13:21:39:  L2 response: [>]
+2016-02-29 13:21:40:  Enable-internal peak power response: [IPO]
+2016-02-29 13:21:40:  MF response [MF]
+2016-02-29 13:21:41:  Are we on? [S2]
+2016-02-29 13:27:55:  Turning laser OFF.
+2016-02-29 13:28:08:  Are we on? [S1]
+2016-02-29 13:28:32:  Turning laser ON.
+2016-02-29 13:28:32:  Enable response: [LONOK]
+2016-02-29 13:28:33:  L2 response: [>]
+2016-02-29 13:28:33:  Enable-internal peak power response: [IPO]
+2016-02-29 13:28:34:  MF response [MF]
+2016-02-29 13:28:35:  Are we on? [S2]
+2016-02-29 13:31:16:  Are we on? [S2]
+2016-02-29 13:31:16:  Turning laser OFF.
+2016-02-29 13:31:17:  Turning laser ON.
+2016-02-29 13:31:17:  Enable response: [LONOK]
+2016-02-29 13:31:18:  L2 response: [>]
+2016-02-29 13:31:19:  Enable-internal peak power response: [IPO]
+2016-02-29 13:31:19:  MF response [MF]
+2016-02-29 13:31:20:  Are we on? [S2]
+2016-02-29 13:32:53:  level=0
+2016-02-29 13:32:53:  power=1228
+2016-02-29 13:32:53:  power level=PP4CC
+2016-02-29 13:32:53:  Power response [PP4CC]
+2016-02-29 13:47:09:  level=0
+2016-02-29 13:47:09:  power=819
+2016-02-29 13:47:09:  power level=PP333
+2016-02-29 13:47:10:  Power response [PP333]
+2016-02-29 13:52:52:  Are we on? [S2]
+2016-02-29 13:52:52:  Turning laser OFF.
+2016-03-01 12:29:13:  Turning laser ON.
+2016-03-01 12:29:13:  Enable response: [LONOK]
+2016-03-01 12:29:14:  L2 response: [>]
+2016-03-01 12:29:15:  Enable-internal peak power response: [IPO]
+2016-03-01 12:29:15:  MF response [MF]
+2016-03-01 12:29:16:  Are we on? [S2]
+2016-03-01 12:33:46:  Are we on? [S2]
+2016-03-01 12:33:46:  Turning laser OFF.
+2016-03-03 10:48:21:  Are we on? [S1]
+2016-03-03 10:48:27:  level=0
+2016-03-03 10:48:27:  power=819
+2016-03-03 10:48:27:  power level=PP333
+2016-03-03 10:48:28:  Power response [PP333]
+2016-03-03 10:49:48:  Turning laser ON.
+2016-03-03 10:49:49:  Enable response: [LONOK]
+2016-03-03 10:49:49:  L2 response: [>]
+2016-03-03 10:49:50:  Enable-internal peak power response: [IPO]
+2016-03-03 10:49:51:  MF response [MF]
+2016-03-03 10:49:51:  Are we on? [S2]
+2016-03-03 11:15:43:  Are we on? [S2]
+2016-03-03 11:15:43:  Turning laser OFF.
+2016-03-03 13:20:38:  Turning laser ON.
+2016-03-03 13:20:39:  Enable response: [LONOK]
+2016-03-03 13:20:39:  L2 response: [>]
+2016-03-03 13:20:40:  Enable-internal peak power response: [IPO]
+2016-03-03 13:20:41:  MF response [MF]
+2016-03-03 13:20:42:  Are we on? [S2]
+2016-03-03 14:11:19:  Are we on? [S2]
+2016-03-03 14:11:19:  Turning laser OFF.
+2016-03-03 14:12:40:  Turning laser ON.
+2016-03-03 14:12:41:  Enable response: [LONOK]
+2016-03-03 14:12:41:  L2 response: [>]
+2016-03-03 14:12:42:  Enable-internal peak power response: [IPO]
+2016-03-03 14:12:43:  MF response [MF]
+2016-03-03 14:12:43:  Are we on? [S2]
+2016-03-03 14:12:52:  level=0
+2016-03-03 14:12:52:  power=204
+2016-03-03 14:12:52:  power level=PP0CC
+2016-03-03 14:12:53:  Power response [PP0CC]
+2016-03-03 14:20:58:  Are we on? [S2]
+2016-03-03 14:20:58:  Turning laser OFF.
+2016-03-03 14:21:46:  Turning laser ON.
+2016-03-03 14:21:47:  Enable response: [LONOK]
+2016-03-03 14:21:47:  L2 response: [>]
+2016-03-03 14:21:48:  Enable-internal peak power response: [IPO]
+2016-03-03 14:21:49:  MF response [MF]
+2016-03-03 14:21:49:  Are we on? [S2]
+2016-03-03 14:32:07:  level=0
+2016-03-03 14:32:07:  power=819
+2016-03-03 14:32:07:  power level=PP333
+2016-03-03 14:32:08:  Power response [PP333]
+2016-03-03 16:08:00:  level=0
+2016-03-03 16:08:00:  power=204
+2016-03-03 16:08:00:  power level=PP0CC
+2016-03-03 16:08:01:  Power response [PP0CC]
+2016-03-03 16:59:56:  level=0
+2016-03-03 16:59:56:  power=1638
+2016-03-03 16:59:56:  power level=PP666
+2016-03-03 16:59:57:  Power response [PP666]
+2016-03-03 17:15:27:  Are we on? [S2]
+2016-03-03 17:15:27:  Turning laser OFF.
+2016-03-03 17:15:33:  Turning laser ON.
+2016-03-03 17:15:33:  Enable response: [LONOK]
+2016-03-03 17:15:34:  L2 response: [>]
+2016-03-03 17:15:35:  Enable-internal peak power response: [IPO]
+2016-03-03 17:15:35:  MF response [MF]
+2016-03-03 17:15:36:  Are we on? [S2]
+2016-03-03 17:16:00:  Are we on? [S2]
+2016-03-03 17:16:00:  Turning laser OFF.
+2016-03-03 17:20:22:  Turning laser ON.
+2016-03-03 17:20:23:  Enable response: [LONOK]
+2016-03-03 17:20:23:  L2 response: [>]
+2016-03-03 17:20:24:  Enable-internal peak power response: [IPO]
+2016-03-03 17:20:25:  MF response [MF]
+2016-03-03 17:20:25:  Are we on? [S2]
+2016-03-03 17:25:26:  level=0
+2016-03-03 17:25:26:  power=204
+2016-03-03 17:25:26:  power level=PP0CC
+2016-03-03 17:25:27:  Power response [PP0CC]
+2016-03-03 17:29:28:  Are we on? [S2]
+2016-03-03 17:29:28:  Turning laser OFF.
+2016-03-03 17:32:20:  Turning laser ON.
+2016-03-03 17:32:21:  Enable response: [LONOK]
+2016-03-03 17:32:22:  L2 response: [>]
+2016-03-03 17:32:22:  Enable-internal peak power response: [IPO]
+2016-03-03 17:32:23:  MF response [MF]
+2016-03-03 17:32:24:  Are we on? [S2]
+2016-03-03 17:32:32:  level=0
+2016-03-03 17:32:32:  power=1638
+2016-03-03 17:32:32:  power level=PP666
+2016-03-03 17:32:32:  Power response [PP666]
+2016-03-03 17:41:48:  level=0
+2016-03-03 17:41:48:  power=204
+2016-03-03 17:41:48:  power level=PP0CC
+2016-03-03 17:41:49:  Power response [PP0CC]
+2016-03-03 17:42:39:  Are we on? [S2]
+2016-03-03 17:42:39:  Turning laser OFF.
+2016-03-03 17:46:14:  Turning laser ON.
+2016-03-03 17:46:14:  Enable response: [LONOK]
+2016-03-03 17:46:15:  L2 response: [>]
+2016-03-03 17:46:16:  Enable-internal peak power response: [IPO]
+2016-03-03 17:46:16:  MF response [MF]
+2016-03-03 17:46:17:  Are we on? [S2]
+2016-03-03 17:46:38:  level=0
+2016-03-03 17:46:38:  power=409
+2016-03-03 17:46:38:  power level=PP199
+2016-03-03 17:46:39:  Power response [PP199]
+2016-03-03 17:50:09:  Turning laser OFF.
+2016-03-03 19:13:53:  Are we on? [S1]
+2016-03-03 19:14:03:  level=0
+2016-03-03 19:14:03:  power=409
+2016-03-03 19:14:03:  power level=PP199
+2016-03-03 19:14:04:  Power response [PP199]
+2016-03-03 19:14:34:  Turning laser ON.
+2016-03-03 19:14:34:  Enable response: [MC 488  200 TA]
+2016-03-03 19:14:35:  L2 response: [LONOK]
+2016-03-03 19:14:35:  Enable-internal peak power response: []
+2016-03-03 19:14:36:  MF response [IPO]
+2016-03-03 19:14:37:  Are we on? [MC 488  200 TA]
+2016-03-03 19:14:38:  Failed to turn on. Current status: MF
+2016-03-03 19:16:25:  Turning laser OFF.

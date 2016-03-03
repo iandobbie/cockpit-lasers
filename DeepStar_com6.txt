@@ -1,0 +1,43 @@
+2016-02-26 10:40:59:  Current laser state: [S1]
+2016-02-26 10:41:08:  Are we on? [S1]
+2016-02-26 10:41:14:  level=0
+2016-02-26 10:41:14:  power=2866
+2016-02-26 10:41:14:  power level=PPB32
+2016-02-26 10:41:14:  Power response [PPB32]
+2016-02-26 11:34:52:  Are we on? [S1]
+2016-02-26 11:34:59:  level=0
+2016-02-26 11:34:59:  power=2866
+2016-02-26 11:34:59:  power level=PPB32
+2016-02-26 11:34:59:  Power response [PPB32]
+2016-02-26 14:22:41:  Turning laser OFF.
+2016-02-26 14:24:15:  Are we on? [S1]
+2016-02-26 14:24:22:  level=0
+2016-02-26 14:24:22:  power=2866
+2016-02-26 14:24:22:  power level=PPB32
+2016-02-26 14:24:23:  Power response [PPB32]
+2016-02-26 16:17:17:  Turning laser OFF.
+2016-02-26 16:47:03:  Are we on? [S1]
+2016-02-26 16:47:15:  level=0
+2016-02-26 16:47:15:  power=2866
+2016-02-26 16:47:15:  power level=PPB32
+2016-02-26 16:47:15:  Power response [PPB32]
+2016-02-26 16:50:22:  Turning laser OFF.
+2016-02-29 10:10:31:  Are we on? [S1]
+2016-02-29 10:10:49:  level=0
+2016-02-29 10:10:49:  power=2866
+2016-02-29 10:10:49:  power level=PPB32
+2016-02-29 10:10:49:  Power response [PPB32]
+2016-02-29 13:27:56:  Turning laser OFF.
+2016-02-29 13:28:09:  Are we on? [S1]
+2016-03-03 10:48:22:  Are we on? [S1]
+2016-03-03 10:48:28:  level=0
+2016-03-03 10:48:28:  power=2866
+2016-03-03 10:48:28:  power level=PPB32
+2016-03-03 10:48:28:  Power response [PPB32]
+2016-03-03 17:50:09:  Turning laser OFF.
+2016-03-03 19:13:54:  Are we on? [S1]
+2016-03-03 19:14:05:  level=0
+2016-03-03 19:14:05:  power=2866
+2016-03-03 19:14:05:  power level=PPB32
+2016-03-03 19:14:05:  Power response [PPB32]
+2016-03-03 19:16:25:  Turning laser OFF.
