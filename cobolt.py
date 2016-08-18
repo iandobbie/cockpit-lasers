@@ -144,7 +144,7 @@ class CoboltLaser(laser.Laser):
         if not self.getIsOn():
             # Something went wrong.
             self.logger.log("Failed to turn on. Current status:\r\n")
-            self.loggerl.log(self.getStatus())
+            self.logger.log(self.getStatus())
             return False
         return True
 
